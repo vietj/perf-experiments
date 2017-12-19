@@ -1,1 +1,1 @@
-java -XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading -XX:+LogCompilation -XX:+PrintAssembly -XX:LogFile=jitwatch.log -jar target/benchmarks.jar -p size=256 offHeap
+java -jar target/benchmarks.jar -jvmArgsPrepend "-XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading -XX:+LogCompilation -XX:+PrintAssembly -XX:LogFile=jitwatch.log" -p size=256
