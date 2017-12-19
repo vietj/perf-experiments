@@ -9,21 +9,21 @@ public class FindFirstSpecialByteTest {
 
   @Test
   public void testNotFound() {
-    assertEquals(-1, new FindFirstSpecialByte.SimpleVersion("ABCDEFGH").find());
-    assertEquals(-1, new FindFirstSpecialByte.SimpleUnrolledVersion("ABCDEFGH").find());
-    assertEquals(-1, new FindFirstSpecialByte.UnsafeVersion("ABCDEFGH").find());
-    assertEquals(-1, new FindFirstSpecialByte.UnsafeUnrolledVersion("ABCDEFGH").find());
-    assertEquals(-1, new FindFirstSpecialByte.OffHeapVersion("ABCDEFGH").find());
-    assertEquals(-1, new FindFirstSpecialByte.OffHeapUnrolledVersion("ABCDEFGH").find());
+    assertEquals(-1, new FindFirstSpecialByte.Compare("ABCDEFGH").find());
+    assertEquals(-1, new FindFirstSpecialByte.LookupUnrolled("ABCDEFGH").find());
+    assertEquals(-1, new FindFirstSpecialByte.UnsafeCompare("ABCDEFGH").find());
+    assertEquals(-1, new FindFirstSpecialByte.UnsafeLookupUnrolled("ABCDEFGH").find());
+    assertEquals(-1, new FindFirstSpecialByte.OffHeapCompare("ABCDEFGH").find());
+    assertEquals(-1, new FindFirstSpecialByte.OffHeapLookupUnrolled("ABCDEFGH").find());
   }
 
   @Test
   public void testFound() {
-    assertEquals(3, new FindFirstSpecialByte.SimpleVersion("ABC\"EFGH").find());
-    assertEquals(3, new FindFirstSpecialByte.SimpleUnrolledVersion("ABC\"EFGH").find());
-    assertEquals(3, new FindFirstSpecialByte.UnsafeVersion("ABC\"EFGH").find());
-    assertEquals(3, new FindFirstSpecialByte.UnsafeUnrolledVersion("ABC\"EFGH").find());
-    assertEquals(3, new FindFirstSpecialByte.OffHeapVersion("ABC\"EFGH").find());
-    assertEquals(3, new FindFirstSpecialByte.OffHeapUnrolledVersion("ABC\"EFGH").find());
+    assertEquals(3, new FindFirstSpecialByte.Compare("ABC\"EFGH").find());
+    assertEquals(3, new FindFirstSpecialByte.LookupUnrolled("ABC\"EFGH").find());
+    assertEquals(3, new FindFirstSpecialByte.UnsafeCompare("ABC\"EFGH").find());
+    assertEquals(3, new FindFirstSpecialByte.UnsafeLookupUnrolled("ABC\"EFGH").find());
+    assertEquals(3, new FindFirstSpecialByte.OffHeapCompare("ABC\"EFGH").find());
+    assertEquals(3, new FindFirstSpecialByte.OffHeapLookupUnrolled("ABC\"EFGH").find());
   }
 }

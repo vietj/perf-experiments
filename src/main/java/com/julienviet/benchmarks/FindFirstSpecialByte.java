@@ -48,13 +48,13 @@ public abstract class FindFirstSpecialByte {
     }
   }
 
-  public static class SimpleVersion extends HeapVersion {
+  public static class Compare extends HeapVersion {
 
-    public SimpleVersion(String data) {
+    public Compare(String data) {
       super(data);
     }
 
-    public SimpleVersion(byte[] data) {
+    public Compare(byte[] data) {
       super(data);
     }
 
@@ -70,13 +70,35 @@ public abstract class FindFirstSpecialByte {
     }
   }
 
-  public static class SimpleUnrolledVersion extends HeapVersion {
+  public static class Lookup extends HeapVersion {
 
-    public SimpleUnrolledVersion(String data) {
+    public Lookup(String data) {
       super(data);
     }
 
-    public SimpleUnrolledVersion(byte[] data) {
+    public Lookup(byte[] data) {
+      super(data);
+    }
+
+    @Override
+    public long find() {
+      for (int i = 0;i < size;i++) {
+        int b = data[i] & 0xFF;
+        if (lookup[b] != 0) {
+          return i;
+        }
+      }
+      return -1;
+    }
+  }
+
+  public static class LookupUnrolled extends HeapVersion {
+
+    public LookupUnrolled(String data) {
+      super(data);
+    }
+
+    public LookupUnrolled(byte[] data) {
       super(data);
     }
 
@@ -85,19 +107,19 @@ public abstract class FindFirstSpecialByte {
       int i = 0;
       while (i < size) {
         int b1 = data[i] & 0xFF;
-        if (b1 < 0x20 || b1 > 127 || b1 == '"' || b1 == '\\') {
+        if (lookup[b1] != 0) {
           return i;
         }
         int b2 = data[i + 1] & 0xFF;
-        if (b2 < 0x20 || b2 > 127 || b2 == '"' || b2 == '\\') {
+        if (lookup[b2] != 0) {
           return i + 1;
         }
         int b3 = data[i + 2] & 0xFF;
-        if (b3 < 0x20 || b3 > 127 || b3 == '"' || b3 == '\\') {
+        if (lookup[b3] != 0) {
           return i + 2;
         }
         int b4 = data[i + 3] & 0xFF;
-        if (b4 < 0x20 || b4 > 127 || b4 == '"' || b4 == '\\') {
+        if (lookup[b4] != 0) {
           return i + 3;
         }
         i += 4;
@@ -106,13 +128,13 @@ public abstract class FindFirstSpecialByte {
     }
   }
 
-  public static class UnsafeVersion extends HeapVersion {
+  public static class UnsafeCompare extends HeapVersion {
 
-    public UnsafeVersion(String data) {
+    public UnsafeCompare(String data) {
       super(data);
     }
 
-    public UnsafeVersion(byte[] data) {
+    public UnsafeCompare(byte[] data) {
       super(data);
     }
 
@@ -130,13 +152,13 @@ public abstract class FindFirstSpecialByte {
     }
   }
 
-  public static class UnsafeUnrolledVersion extends HeapVersion {
+  public static class UnsafeLookupUnrolled extends HeapVersion {
 
-    public UnsafeUnrolledVersion(String data) {
+    public UnsafeLookupUnrolled(String data) {
       super(data);
     }
 
-    public UnsafeUnrolledVersion(byte[] data) {
+    public UnsafeLookupUnrolled(byte[] data) {
       super(data);
     }
 
@@ -197,13 +219,13 @@ public abstract class FindFirstSpecialByte {
     }
   }
 
-  public static class OffHeapVersion extends OffHeapBase {
+  public static class OffHeapCompare extends OffHeapBase {
 
-    public OffHeapVersion(String data) {
+    public OffHeapCompare(String data) {
       super(data);
     }
 
-    public OffHeapVersion(byte[] data) {
+    public OffHeapCompare(byte[] data) {
       super(data);
     }
 
@@ -221,13 +243,13 @@ public abstract class FindFirstSpecialByte {
     }
   }
 
-  public static class OffHeapUnrolledVersion extends OffHeapBase {
+  public static class OffHeapLookupUnrolled extends OffHeapBase {
 
-    public OffHeapUnrolledVersion(String data) {
+    public OffHeapLookupUnrolled(String data) {
       super(data);
     }
 
-    public OffHeapUnrolledVersion(byte[] data) {
+    public OffHeapLookupUnrolled(byte[] data) {
       super(data);
     }
 

@@ -25,12 +25,13 @@ public class FindFirstSpecialByteBenchmark extends BenchmarkBase {
   @Param({"256", "4096", "65536"})
   int size;
 
-  FindFirstSpecialByte findSimple;
-  FindFirstSpecialByte findSimpleUnrolled;
-  FindFirstSpecialByte findUnsafe;
-  FindFirstSpecialByte findUnsafeUnrolled;
-  FindFirstSpecialByte findOffHeap;
-  FindFirstSpecialByte findOffHeapUnrolled;
+  FindFirstSpecialByte compare;
+  FindFirstSpecialByte lookup;
+  FindFirstSpecialByte lookupUnrolled;
+  FindFirstSpecialByte unsafeCompare;
+  FindFirstSpecialByte unsafeLookupUnrolled;
+  FindFirstSpecialByte offHeapCompare;
+  FindFirstSpecialByte offHeapLookupUnrolled;
 
   @Setup
   public void setup() {
@@ -39,41 +40,47 @@ public class FindFirstSpecialByteBenchmark extends BenchmarkBase {
       byte val = (byte) (65 + (i % 26));
       data[i] = val;
     }
-    findSimple = new FindFirstSpecialByte.SimpleVersion(data);
-    findSimpleUnrolled = new FindFirstSpecialByte.SimpleUnrolledVersion(data);
-    findUnsafe = new FindFirstSpecialByte.UnsafeVersion(data);
-    findUnsafeUnrolled = new FindFirstSpecialByte.UnsafeUnrolledVersion(data);
-    findOffHeap = new FindFirstSpecialByte.OffHeapVersion(data);
-    findOffHeapUnrolled = new FindFirstSpecialByte.OffHeapUnrolledVersion(data);
+    compare = new FindFirstSpecialByte.Compare(data);
+    lookup = new FindFirstSpecialByte.Lookup(data);
+    lookupUnrolled = new FindFirstSpecialByte.LookupUnrolled(data);
+    unsafeCompare = new FindFirstSpecialByte.UnsafeCompare(data);
+    unsafeLookupUnrolled = new FindFirstSpecialByte.UnsafeLookupUnrolled(data);
+    offHeapCompare = new FindFirstSpecialByte.OffHeapCompare(data);
+    offHeapLookupUnrolled = new FindFirstSpecialByte.OffHeapLookupUnrolled(data);
   }
 
   @Benchmark
-  public long comparison() {
-    return findSimple.find();
+  public long compare() {
+    return compare.find();
   }
 
   @Benchmark
-  public long comparisonUnrolled() {
-    return findSimpleUnrolled.find();
+  public long lookup() {
+    return lookup.find();
   }
 
   @Benchmark
-  public long unsafeComparison() {
-    return findUnsafe.find();
+  public long lookupUnrolled() {
+    return lookupUnrolled.find();
   }
 
   @Benchmark
-  public long unsafeComparisonUnrolled() {
-    return findUnsafeUnrolled.find();
+  public long unsafeCompare() {
+    return unsafeCompare.find();
   }
 
   @Benchmark
-  public long offHeapComparison() {
-    return findOffHeap.find();
+  public long unsafeLookupUnrolled() {
+    return unsafeLookupUnrolled.find();
   }
 
   @Benchmark
-  public long offHeapComparisonUnrolled() {
-    return findOffHeapUnrolled.find();
+  public long offHeapCompare() {
+    return offHeapCompare.find();
+  }
+
+  @Benchmark
+  public long offHeapLookupUnrolled() {
+    return offHeapLookupUnrolled.find();
   }
 }
