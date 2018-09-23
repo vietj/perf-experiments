@@ -14,8 +14,9 @@
  * limitations under the License.
  *
  */
-package com.julienviet.benchmarks;
+package com.julienviet.benchmarks.firstspecialbyte;
 
+import com.julienviet.benchmarks.BenchmarkBase;
 import org.openjdk.jmh.annotations.*;
 
 @State(Scope.Benchmark)

@@ -1,4 +1,4 @@
-package com.julienviet.benchmarks;
+package com.julienviet.benchmarks.firstspecialbyte;
 
 import sun.misc.Unsafe;
 

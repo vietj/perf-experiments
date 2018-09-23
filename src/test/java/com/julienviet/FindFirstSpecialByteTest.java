@@ -1,6 +1,6 @@
 package com.julienviet;
 
-import com.julienviet.benchmarks.FindFirstSpecialByte;
+import com.julienviet.benchmarks.firstspecialbyte.FindFirstSpecialByte;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

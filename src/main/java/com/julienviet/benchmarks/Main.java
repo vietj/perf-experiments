@@ -1,5 +1,7 @@
 package com.julienviet.benchmarks;
 
+import com.julienviet.benchmarks.firstspecialbyte.FindFirstSpecialByte;
+
 public class Main {
 
   public static void main(String[] args) {
